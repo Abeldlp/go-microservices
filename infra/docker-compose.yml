@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  # Manager ui
+  ui:
+    container_name: manager-ui
+    build:
+      dockerfile: ../manager-ui/Dockerfile
+      context: ../manager-ui
+      # target: dev
+    volumes:
+      - ../manager-ui:/opt/app/api
+    ports:
+      - "4000:3000"
+
+  ## Manager api
+  app:
+    container_name: manager-api
+    build:
+      dockerfile: ../manager-api/Dockerfile
+      context: ../manager-api
+      target: dev
+    volumes:
+      - ../manager-api:/opt/app/api
+    environment:
+      API_SERVER_ADDR: ":8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - app_db
+
+  ##Manager database
+  app_db:
+    image: mysql:5.7
+    container_name: manager-api-db
+    environment:
+      MYSQL_DATABASE: "manager-api"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "3306:3306"
+    volumes:
+      - manager-db:/var/lib/mysql
+
+  #Manager mail service
+  #mail:
+  #  build:
+  #    dockerfile: ../manager-mail/Dockerfile
+  #    context: ../manager-mail
+  #    target: dev
+  #  volumes:
+  #    - ../manager-mail:/opt/app/api
+  #  environment:
+  #    API_SERVER_ADDR: ":8080"
+  #  ports:
+  #    - "8081:8080"
+
+  ##Manager mail service
+  #mail_db:
+  #  image: mysql:5.7
+  #  environment:
+  #    MYSQL_DATABASE: "manager-mail"
+  #    MYSQL_USER: "user"
+  #    MYSQL_PASSWORD: "password"
+  #    MYSQL_ROOT_PASSWORD: "password"
+  #  ports:
+  #    - "3316:3306"
+  #  # expose:
+  #  #   - "3306"
+  #  volumes:
+  #    - manager-mail-db:/var/lib/mysql
+volumes:
+  manager-db:
+  # manager-mail-db:
