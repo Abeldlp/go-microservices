@@ -22,6 +22,7 @@ func main() {
 
 	{
 		inquiry.GET("/", controllers.GetAllInquiries)
+		inquiry.GET("/:id", controllers.GetInquiryById)
 		inquiry.POST("/", controllers.CreateInquiry)
 	}
 

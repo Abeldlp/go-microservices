@@ -13,6 +13,14 @@ func GetAllInquiries(c *gin.Context) {
 	c.JSON(http.StatusOK, inquiries)
 }
 
+func GetInquiryById(c *gin.Context) {
+	id := c.Param("id")
+	var inquiry models.Inquiry
+	config.DB.First(&inquiry, id)
+
+	c.JSON(http.StatusOK, inquiry)
+}
+
 func CreateInquiry(c *gin.Context) {
 	var inquiry models.Inquiry
 	c.BindJSON(&inquiry)
