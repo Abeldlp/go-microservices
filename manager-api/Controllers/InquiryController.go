@@ -32,3 +32,12 @@ func CreateInquiry(c *gin.Context) {
 		"assignee": inquiry.Assignee,
 	})
 }
+
+func DeleteInquiry(c *gin.Context) {
+	id := c.Param("id")
+	config.DB.Delete(&models.Inquiry{}, id)
+
+	c.JSON(http.StatusOK, gin.H{
+		"deleted_inquiry": id,
+	})
+}

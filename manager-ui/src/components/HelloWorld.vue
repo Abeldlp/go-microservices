@@ -2,7 +2,7 @@
 import { onMounted, ref } from "vue";
 import axios from "axios";
 interface Inquiry {
-  id?: string;
+  ID?: string;
   CreatedAt?: Date;
   UpdateAt?: Date;
   DeletedAt?: Date;
@@ -32,6 +32,14 @@ const submitForm = () => {
     });
 };
 
+const deleteInquiry = (id: string) => {
+  axios.delete(`http://localhost:8080/inquiries/${id}`).then(() => {
+    axios.get("http://localhost:8080/inquiries/").then((res) => {
+      inquiries.value = res.data;
+    });
+  });
+};
+
 onMounted(() => {
   axios.get("http://localhost:8080/inquiries/").then((res) => {
     inquiries.value = res.data;
@@ -54,15 +62,26 @@ onMounted(() => {
     <button @click="submitForm">Submit</button>
   </div>
   <div class="inquiry-container">
-    <div class="inquiry-block" v-for="inquiry in inquiries" :key="inquiry.id">
+    <div class="inquiry-block" v-for="inquiry in inquiries" :key="inquiry.ID">
       <p>{{ inquiry.message }}</p>
       <p>{{ inquiry.CreatedAt }}</p>
       <p>{{ inquiry.assignee || "No assignee" }}</p>
+      <button
+        @click="deleteInquiry(inquiry.ID as string)"
+        class="delete-button"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </template>
 
 <style scoped>
+.delete-button {
+  background-color: #ffcdd2;
+  color: white;
+}
+
 .read-the-docs {
   color: #888;
 }
