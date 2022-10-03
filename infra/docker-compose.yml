@@ -44,30 +44,34 @@ services:
       - manager-db:/var/lib/mysql
 
   #Manager mail service
-  #mail:
-  #  build:
-  #    dockerfile: ../manager-mail/Dockerfile
-  #    context: ../manager-mail
-  #    target: dev
-  #  volumes:
-  #    - ../manager-mail:/opt/app/api
-  #  environment:
-  #    API_SERVER_ADDR: ":8080"
-  #  ports:
-  #    - "8081:8080"
+  mail:
+    container_name: manager-mail
+    build:
+      dockerfile: ../manager-mail/Dockerfile
+      context: ../manager-mail
+      target: dev
+    volumes:
+      - ../manager-mail:/opt/app/api
+    environment:
+      API_SERVER_ADDR: ":8080"
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mail_db
 
   ##Manager mail service
-  #mail_db:
-  #  image: mysql:5.7
-  #  environment:
-  #    MYSQL_DATABASE: "manager-mail"
-  #    MYSQL_USER: "user"
-  #    MYSQL_PASSWORD: "password"
-  #    MYSQL_ROOT_PASSWORD: "password"
-  #  ports:
-  #    - "3307:3306"
-  #  volumes:
-  #    - manager-mail-db:/var/lib/mysql
+  mail_db:
+    image: mysql:5.7
+    container_name: manager-mail-db
+    environment:
+      MYSQL_DATABASE: "manager-mail"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "3307:3306"
+    volumes:
+      - manager-mail-db:/var/lib/mysql
 volumes:
   manager-db:
-  # manager-mail-db:
+  manager-mail-db:
