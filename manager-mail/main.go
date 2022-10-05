@@ -1,20 +1,28 @@
 package main
 
 import (
-	"net/http"
+	"log"
+	"net"
 
 	"github.com/Abeldlp/manager-mail/config"
-	"github.com/gin-gonic/gin"
+	"github.com/Abeldlp/manager-mail/mailpb"
+	"github.com/Abeldlp/manager-mail/server"
+	"google.golang.org/grpc"
 )
 
 func main() {
 	config.InitializeDatabase()
 
-	r := gin.Default()
-	r.GET("/mail", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "this is the mail microservice",
-		})
-	})
-	r.Run()
+	lis, err := net.Listen("tcp", "0.0.0.0:50051")
+
+	if err != nil {
+		log.Fatalf("Failed to listen: %v", err)
+	}
+
+	s := grpc.NewServer()
+	mailpb.RegisterMailServiceServer(s, &server.Server{})
+
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }

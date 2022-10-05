@@ -1,7 +1,8 @@
 package models
 
 type Mail struct {
-	Subject string `json:"subject"`
-	Message string `json:"message"`
-	From    string `json:"from"`
+	Subject  string `json:"subject"`
+	Sender   string `json:"sender"`
+	Receiver string `json:"receiver"`
+	Content  string `json:"content"`
 }

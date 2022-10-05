@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package mail;
+option go_package="mailpb";
+
+message Mail {
+    string subject = 1;
+    string sender = 2;
+    string receiver = 3;
+    string content = 4;
+}
+
+message CreateMailRequest {
+    Mail mail = 1;
+}
+
+message CreateMailResponse {
+    Mail mail = 1;
+}
+
+message GetAllMailRequest {
+
+}
+
+message GetAllMailResponse {
+    repeated Mail mail = 1;
+}
+
+service MailService {
+    rpc CreateMail(CreateMailRequest) returns (CreateMailResponse) {};
+    rpc GetAllMails(GetAllMailRequest) returns (GetAllMailResponse) {};
+}
+
