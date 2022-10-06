@@ -2,30 +2,15 @@ package main
 
 import (
 	"github.com/Abeldlp/go-and-compose/config"
-	"github.com/Abeldlp/go-and-compose/controllers"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	"github.com/Abeldlp/go-and-compose/routes"
 )
 
 func main() {
 	config.InitializeDatabase()
+	r := config.BuildRouter()
 
-	r := gin.Default()
-
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders: []string{"*"},
-	}))
-
-	inquiry := r.Group("/inquiries")
-
-	{
-		inquiry.GET("/", controllers.GetAllInquiries)
-		inquiry.GET("/:id", controllers.GetInquiryById)
-		inquiry.POST("/", controllers.CreateInquiry)
-		inquiry.DELETE("/:id", controllers.DeleteInquiry)
-	}
+	//Routes
+	routes.AppendInquiryRoutes(r)
 
 	r.Run()
 }
