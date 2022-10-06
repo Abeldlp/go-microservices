@@ -5,8 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var InquiryRoutes *gin.RouterGroup
-
 func AppendInquiryRoutes(r *gin.Engine) {
 
 	inquiry := r.Group("/inquiries")
