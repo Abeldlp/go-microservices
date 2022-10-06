@@ -1,8 +1,8 @@
 package main
 
 import (
-	controllers "github.com/Abeldlp/go-and-compose/Controllers"
 	"github.com/Abeldlp/go-and-compose/config"
+	"github.com/Abeldlp/go-and-compose/controllers"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )

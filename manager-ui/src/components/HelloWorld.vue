@@ -20,6 +20,7 @@ const assignee = ref<string>("");
 const submitForm = () => {
   axios
     .post("http://localhost:8080/inquiries/", {
+      shop_id: 1,
       message: message.value,
       assignee: assignee.value,
     })

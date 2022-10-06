@@ -1,7 +1,7 @@
 package config
 
 import (
-	models "github.com/Abeldlp/go-and-compose/Models"
+	"github.com/Abeldlp/go-and-compose/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -16,7 +16,12 @@ func InitializeDatabase() {
 		panic("failed to connect database")
 	}
 
-	db.AutoMigrate(&models.Inquiry{})
+	db.AutoMigrate(
+		&models.Shop{},
+		&models.Inquiry{},
+		&models.ProductCategory{},
+		&models.Product{},
+	)
 
 	DB = db
 }
