@@ -12,5 +12,8 @@ func AppendShopRoutes(r *gin.Engine) {
 
 	{
 		shop.GET("/", controllers.GetAllShops)
+		shop.GET("/:id", controllers.GetInquiryById)
+		shop.POST("/", controllers.CreateShop)
+		shop.DELETE("/:id", controllers.DeleteShop)
 	}
 }
