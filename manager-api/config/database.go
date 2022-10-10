@@ -13,7 +13,7 @@ var DB *gorm.DB
 func InitializeDatabase() {
 	// dsn := "user:password@tcp(manager-api-db:3306)/manager-api?charset=utf8mb4&parseTime=True&loc=Local"
 
-	dsn := "host=" + os.Getenv("DATABASE_HOST") + " user=" + os.Getenv("DATABASE_USER") + " password=" + os.Getenv("DATABASE_PASSWORD") + " dbname=" + os.Getenv("DATABASE_NAME") + " port=9920 sslmode=disable TimeZone=Europe/Amsterdam"
+	dsn := "host=" + os.Getenv("DATABASE_HOST") + " user=" + os.Getenv("DATABASE_USER") + " password=" + os.Getenv("DATABASE_PASSWORD") + " dbname=" + os.Getenv("DATABASE_NAME") + " port=" + os.Getenv("DATABASE_PORT") + " sslmode=disable TimeZone=Europe/Amsterdam"
 	// db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
