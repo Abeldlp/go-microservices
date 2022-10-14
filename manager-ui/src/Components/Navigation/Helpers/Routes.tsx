@@ -1,6 +1,5 @@
 import InboxIcon from "@mui/icons-material/Shop";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { api } from "../../../api/Api";
 
 interface Menu {
   title: string;
@@ -13,8 +12,6 @@ interface Link {
   name: string;
   to: string;
 }
-
-api.get("/my-api-call");
 
 const menus: Menu[] = [
   {
