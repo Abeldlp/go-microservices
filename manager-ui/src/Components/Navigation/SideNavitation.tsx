@@ -1,7 +1,7 @@
 import { Box, List, ListItemIcon, ListSubheader } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SideNavigationItem from "./SideNavigationItem";
-import { menus, Menu, Link } from "./Helpers/Routes";
+import { menus, Menu, Link as LinkInterface } from "./Helpers/Routes";
 
 const backColor = "lightgrey";
 
@@ -25,9 +25,10 @@ const SideNavigation: React.FC = () => {
         }}
       >
         {/* Loop through the menus */}
-        {sideNavigationMenu.map((menu: Menu) => {
+        {sideNavigationMenu.map((menu: Menu, index: number) => {
           return (
             <List
+              key={index}
               component="nav"
               aria-labelledby="nested-list-subheader"
               subheader={
@@ -46,8 +47,8 @@ const SideNavigation: React.FC = () => {
               }
             >
               {/* Loop through links in the menus */}
-              {menu.links.map((link: Link) => (
-                <SideNavigationItem text={link.name} />
+              {menu.links.map((link: LinkInterface, index: number) => (
+                <SideNavigationItem key={index} text={link.name} to={link.to} />
               ))}
             </List>
           );
