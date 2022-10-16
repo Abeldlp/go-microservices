@@ -31,15 +31,15 @@ services:
 
   ##Manager database
   app_db:
-    image: mysql:5.7
+    image: postgres
     container_name: manager-api-db
     environment:
-      MYSQL_DATABASE: "manager-api"
-      MYSQL_USER: "user"
-      MYSQL_PASSWORD: "password"
-      MYSQL_ROOT_PASSWORD: "password"
+      POSTGRES_DB: "manager-api"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_ROOT_PASSWORD: "password"
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
       - manager-db:/var/lib/mysql
 
