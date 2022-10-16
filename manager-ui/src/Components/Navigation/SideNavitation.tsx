@@ -10,7 +10,7 @@ const SideNavigation: React.FC = () => {
 
   useEffect(() => {
     let newNavigation = [...sideNavigationMenu];
-    newNavigation[0].links.push({ name: "hello", to: "world" }); // Api call goes here
+    newNavigation[0].links.push({ name: "Test route", to: "/world" }); // Api call goes here
     setSideNavigationMenu(newNavigation);
   }, []);
 
@@ -48,7 +48,11 @@ const SideNavigation: React.FC = () => {
             >
               {/* Loop through links in the menus */}
               {menu.links.map((link: LinkInterface, index: number) => (
-                <SideNavigationItem key={index} text={link.name} to={link.to} />
+                <SideNavigationItem
+                  key={index}
+                  text={link.name}
+                  to={`${menu.subroute}${link.to}`}
+                />
               ))}
             </List>
           );

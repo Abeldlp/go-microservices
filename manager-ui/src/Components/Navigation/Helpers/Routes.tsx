@@ -36,7 +36,7 @@ const menus: Menu[] = [
     links: [
       {
         name: "admin",
-        to: "/124",
+        to: "/admin",
       },
     ],
   },
