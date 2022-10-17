@@ -4,10 +4,16 @@ import (
 	"github.com/Abeldlp/go-and-compose/config"
 	"github.com/Abeldlp/go-and-compose/routes"
 	"github.com/joho/godotenv"
+	"os"
 )
 
 func main() {
-	godotenv.Load(".env")
+	env := os.Getenv("PROD_ENV")
+
+	if env == "" {
+		godotenv.Load(".env")
+	}
+
 	config.InitializeDatabase()
 	r := config.BuildRouter()
 

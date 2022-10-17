@@ -11,7 +11,7 @@ services:
     volumes:
       - ../manager-ui:/opt/app/api
     ports:
-      - "4000:3000"
+      - "3000:3000"
 
   ## Manager api
   app:
