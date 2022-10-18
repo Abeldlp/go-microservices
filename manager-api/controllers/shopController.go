@@ -15,7 +15,7 @@ func GetAllShops(c *gin.Context) {
 	c.JSON(http.StatusOK, shops)
 }
 
-func getShopById(c *gin.Context) {
+func GetShopById(c *gin.Context) {
 	id := c.Param("id")
 	var shop models.Shop
 

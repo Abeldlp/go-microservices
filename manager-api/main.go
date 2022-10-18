@@ -20,6 +20,7 @@ func main() {
 	//Routes
 	routes.AppendInquiryRoutes(r)
 	routes.AppendShopRoutes(r)
+	routes.AppendCategoryRoutes(r)
 
 	r.Run()
 }
