@@ -13,5 +13,6 @@ func AppendCategoryRoutes(r *gin.Engine) {
 	{
 		category.GET("/", controllers.GetAllCategories)
 		category.GET("/:id", controllers.GetCategoryById)
+		category.POST("/", controllers.CreateCategory)
 	}
 }

@@ -23,3 +23,12 @@ func GetCategoryById(c *gin.Context) {
 
 	c.JSON(http.StatusOK, category)
 }
+
+func CreateCategory(c *gin.Context) {
+	var category models.ProductCategory
+	c.BindJSON(&category)
+
+	config.DB.Create(&models.ProductCategory{
+		CategoryName: category.CategoryName,
+	})
+}
